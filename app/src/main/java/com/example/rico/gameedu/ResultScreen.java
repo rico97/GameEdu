@@ -2,14 +2,13 @@ package com.example.rico.gameedu;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.content.FileProvider;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -22,7 +21,10 @@ import java.util.List;
 public class ResultScreen extends Activity {
 
     private ResultDisplay resultDisplay;
-    private SharedPreferences preferences;
+    private SoundManager soundManager;
+    private int screenshot,choose;
+    private int finalScore;
+    private SimpleDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +34,22 @@ public class ResultScreen extends Activity {
 
         resultDisplay = (ResultDisplay) findViewById(R.id.resultScreen);
 
-        preferences = getSharedPreferences("New Score",MODE_PRIVATE);
+        soundManager = new SoundManager(this);
+        screenshot = soundManager.addSound(R.raw.screenshot_sound);
+        choose = soundManager.addSound(R.raw.choose_sound);
 
-        resultDisplay.setFinalScore(preferences.getInt("Current Score",0));
-        preferences.edit().clear().apply();
+        db = new SimpleDatabase(this);
+
+        int currentScoreId = db.getScoreCount();
+
+        Cursor c = db.getPerson(currentScoreId);
+        if(!(c==null)){
+            c.moveToFirst();
+            finalScore = c.getInt(c.getColumnIndex("score"));
+        }
+        resultDisplay.setFinalScore(finalScore);
+
+
     }
 
     public boolean onTouchEvent(MotionEvent event) {
@@ -46,9 +60,12 @@ public class ResultScreen extends Activity {
         Position position = resultDisplay.getPosition(event.getX(), event.getY());
         switch (position){
             case SHARE_BUTTON:
+                soundManager.play(screenshot);
                 shareTwitter();
                 break;
             case EXIT_BUTTON:
+                soundManager.play(choose);
+                db.close();
                 finish();
         }
         return super.onTouchEvent(event);
@@ -65,7 +82,7 @@ public class ResultScreen extends Activity {
             screenBitmap.compress(Bitmap.CompressFormat.PNG,100,outputStream);
             outputStream.close();
         } catch (Exception e){
-            System.out.println(e);
+            System.out.println("Error");
         }
 
         File newCache = new File(this.getCacheDir(),"Screenshot");
@@ -75,7 +92,8 @@ public class ResultScreen extends Activity {
         Intent tweet = new Intent(Intent.ACTION_SEND);
         tweet.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         tweet.setDataAndType(uri, this.getContentResolver().getType(uri));
-        tweet.putExtra(Intent.EXTRA_TEXT,"I just got a score of 10 in What's the number");
+        String twitterPost = ("I just got a score of "+finalScore+" in What's the number");
+        tweet.putExtra(Intent.EXTRA_TEXT,twitterPost);
         tweet.putExtra(Intent.EXTRA_STREAM,uri);
         tweet.setType("image/*");
 

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -27,6 +28,7 @@ public class Display extends View {
         paint = new Paint();
         paint.setTextSize(100);
         paint.setTextAlign(Paint.Align.CENTER);
+        setBackground(ContextCompat.getDrawable(this.getContext(), R.drawable.bg_game));
     }
 
     private PointF getCenter() {

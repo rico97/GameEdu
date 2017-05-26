@@ -1,7 +1,7 @@
 package com.example.rico.gameedu;
 
 
-public enum Position {
+enum Position {
     TOP_BUTTON,
     MIDDLE_BUTTON,
     BOTTOM_BUTTON,

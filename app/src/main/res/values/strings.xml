@@ -1,5 +1,32 @@
 <resources>
     <string name="app_name">What\'s the number</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="leaderboards_button">Leaderboards button</string>
+    <string name="setting_button">Setting button</string>
+    <string name="first_instruction">There will be 10 addition question</string>
+    <string name="second_instruction">You will be rewarded with more point on higher difficulty</string>
+    <string name="third_instruction">You will also get more point when you answer faster</string>
+    <string name="clicking_picture_instruction">Clicking picture</string>
+    <string name="click_instruction">Click on the correct answer</string>
+    <string name="shake_picture_instruction">Shake picture</string>
+    <string name="shake_instruction">Shake to go to the next question</string>
+    <string name="simple_text">Simple right?</string>
+    <string name="play_now_button_text">PLAY NOW</string>
+    <string name="leaderboards_title">LEADERBOARDS</string>
+    <string name="play_text">PLAY</string>
+    <string name="how_to_text">HOW TO</string>
+    <string name="exit_text">EXIT</string>
+    <string name="number_1_picture">Number 1 picture</string>
+    <string name="addition_picture">Addition picture</string>
+    <string name="number_3_picture">Number 3 picture</string>
+    <string name="equal_picture">Equal picture</string>
+    <string name="question_mark_picture">Question mark picture</string>
+    <string name="difficulty_text">Difficulty</string>
+    <string name="easy_text">Easy</string>
+    <string name="normal_text">Normal</string>
+    <string name="hard_text">Hard</string>
+    <string name="music_text">Music</string>
+    <string name="on_text">On</string>
+    <string name="off_text">Off</string>
 
 </resources>

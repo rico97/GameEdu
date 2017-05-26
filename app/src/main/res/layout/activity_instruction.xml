@@ -4,60 +4,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.rico.gameedu.Instruction"
+    android:background="@drawable/bg_side"
     android:orientation="vertical">
 
     <TextView
-        android:layout_marginTop="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="There will be 10 addition question"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="You will be rewarded with more point on higher dificulty"/>
-
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_height="150dp"
-        android:src="@drawable/click" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Click on the correct answer"/>
-
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_gravity="center"
-        android:layout_height="150dp"
-        android:src="@drawable/shake" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Shake to go to the next question"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"
-        android:text="Simple right?"/>
-
-    <Button
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="@string/first_instruction"/>
+
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="@string/second_instruction"/>
+
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="@string/third_instruction"/>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_height="150dp"
+        android:src="@drawable/click"
+        android:contentDescription="@string/clicking_picture_instruction" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/click_instruction"/>
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_gravity="center"
+        android:layout_height="150dp"
+        android:src="@drawable/shake"
+        android:contentDescription="@string/shake_picture_instruction" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/shake_instruction"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:text="@string/simple_text"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:onClick="playGame"
-        android:text="play now" />
+        android:text="@string/play_now_button_text" />
 </LinearLayout>

@@ -1,15 +1,13 @@
 package com.example.rico.gameedu;
 
-import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -21,6 +19,7 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         showActionBar();
+
     }
 
     public void playGame(View view){
@@ -40,13 +39,18 @@ public class MainMenu extends AppCompatActivity {
     public void showActionBar() {
 
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
-        LayoutInflater mInflater = LayoutInflater.from(this);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setElevation(0);
+        actionBar.setBackgroundDrawable(ContextCompat.getDrawable(this,R.drawable.bg_main_top));
 
-        View mCustomView = mInflater.inflate(R.layout.ab_custom, null);
+        //The null error can be ignored as the version used need some modification
+        View actionBarLayout = getLayoutInflater().inflate(R.layout.ab_custom,null);
+        actionBar.setCustomView(actionBarLayout);
 
-        ImageButton leaderboardButton = (ImageButton) mCustomView.findViewById(R.id.leaderboardsButton);
+        ImageButton leaderboardButton = (ImageButton) actionBarLayout.findViewById(R.id.leaderboardsButton);
         leaderboardButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -56,7 +60,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        ImageButton settingButton = (ImageButton) mCustomView.findViewById(R.id.settingButton);
+        ImageButton settingButton = (ImageButton) actionBarLayout.findViewById(R.id.settingButton);
         settingButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -66,7 +70,5 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        actionBar.setCustomView(mCustomView);
-        actionBar.setDisplayShowCustomEnabled(true);
     }
 }

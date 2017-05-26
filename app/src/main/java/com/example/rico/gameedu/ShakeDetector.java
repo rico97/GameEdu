@@ -4,13 +4,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.FloatMath;
 
-/**
- * Created by Rico on 5/24/2017.
- */
 
-public class ShakeDetector implements SensorEventListener {
+class ShakeDetector implements SensorEventListener {
 
     private static final float SHAKE_THRESHOLD_GRAVITY = 2.7F;
     private static final int SHAKE_SLOP_TIME_MS = 500;
@@ -20,12 +16,12 @@ public class ShakeDetector implements SensorEventListener {
     private long mShakeTimestamp;
     private int mShakeCount;
 
-    public void setOnShakeListener(OnShakeListener listener) {
+    void setOnShakeListener(OnShakeListener listener) {
         this.mListener = listener;
     }
 
-    public interface OnShakeListener {
-        public void onShake(int count);
+    interface OnShakeListener {
+        void onShake(int count);
     }
 
     @Override

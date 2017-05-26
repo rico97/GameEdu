@@ -2,24 +2,16 @@ package com.example.rico.gameedu;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 
 public class Setting extends Activity {
 
     private RadioGroup difficultyLevel;
     private RadioGroup musicActivated;
     private SharedPreferences settings;
-    private RadioButton easyButton;
-    private RadioButton normalButton;
-    private RadioButton hardButton;
-    private RadioButton musicOnButton;
-    private RadioButton musicOffButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +21,12 @@ public class Setting extends Activity {
 
         difficultyLevel = (RadioGroup) findViewById(R.id.difficultyLevel);
         musicActivated = (RadioGroup) findViewById(R.id.musicButton);
+
+        RadioButton easyButton;
+        RadioButton normalButton;
+        RadioButton hardButton;
+        RadioButton musicOnButton;
+        RadioButton musicOffButton;
 
         easyButton = (RadioButton) findViewById(R.id.easyButton);
         normalButton = (RadioButton) findViewById(R.id.normalButton);

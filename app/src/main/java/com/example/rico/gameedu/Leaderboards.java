@@ -1,24 +1,16 @@
 package com.example.rico.gameedu;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
+import java.util.Locale;
 
 public class Leaderboards extends Activity {
-
-    private SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,26 +18,28 @@ public class Leaderboards extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_leaderboards);
 
-        preferences = getSharedPreferences("Scores",MODE_PRIVATE);
+        SimpleDatabase db;
+        db = new SimpleDatabase(this);
 
-        ArrayList<Integer> myArray = new ArrayList<>();
+        ArrayList<Integer> myArray;
         ArrayList<String> ranking = new ArrayList<>();
-        Map<String,?> keys = preferences.getAll();
-        for(Map.Entry<String,?> entry : keys.entrySet()){
-            System.out.println(entry.getKey() +" : " + entry.getValue().toString());
-            myArray.add(Integer.parseInt(entry.getValue().toString()));
-        }
+        myArray = db.getAllScores();
 
         Collections.sort(myArray, Collections.reverseOrder());
 
         int enumerator = 1;
-        for(int points : myArray){
-            System.out.println("NICE");
-            ranking.add(String.format("%2d .  %2d ", enumerator,points));
-            enumerator++;
+        if(myArray.size()<10) {
+            for (int points : myArray) {
+                ranking.add(String.format(Locale.getDefault(), "%1$2s.  %2$3s ", Integer.toString(enumerator), Integer.toString(points)));
+                enumerator++;
+            }
+        } else {
+            for(int x = 0 ; x<10 ; x++){
+                ranking.add(String.format(Locale.getDefault(), "%1$2s.  %2$3s ", Integer.toString(enumerator), Integer.toString(myArray.get(x))));
+                enumerator++;
+            }
         }
-
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,ranking);
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<>(this, R.layout.leaderboard_view,ranking);
         ListView listview = (ListView) findViewById(R.id.ranking_list);
         listview.setAdapter(myAdapter);
         listview.setDivider(null);
