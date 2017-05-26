@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.SoundPool;
 
 class SoundManager {
+    //Code for the sound when some button is pressed
     private Context context;
     private SoundPool pool;
     SoundManager(Context context){

@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 class SimpleDatabase extends SQLiteOpenHelper{
-
+    //Database creation class
     private final static int VERSION = 1;
 
     private static final String DB_NAME = "Leaderboards";
@@ -39,6 +39,7 @@ class SimpleDatabase extends SQLiteOpenHelper{
     }
 
     boolean addScore(int score){
+        //Adding a score into the database
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -56,6 +57,7 @@ class SimpleDatabase extends SQLiteOpenHelper{
     }
 
     int getScoreCount() {
+        //Get the total number of score in the database
         SQLiteDatabase db = this.getReadableDatabase();
         String countQuery = "SELECT  * FROM " + TABLE_NAME;
         Cursor cursor = db.rawQuery(countQuery, null);
@@ -66,6 +68,7 @@ class SimpleDatabase extends SQLiteOpenHelper{
     }
 
     ArrayList<Integer> getAllScores() {
+        //Getting all the score
         ArrayList<Integer> scoreList = new ArrayList<>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_NAME;
@@ -80,7 +83,6 @@ class SimpleDatabase extends SQLiteOpenHelper{
             } while (cursor.moveToNext());
         }
         cursor.close();
-        // return contact list
         return scoreList;
     }
 }

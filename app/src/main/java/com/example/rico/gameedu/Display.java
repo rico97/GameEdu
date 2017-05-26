@@ -20,6 +20,7 @@ public class Display extends View {
     private Paint paint;
     public Display(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        //Creating the base display for game screen
         message = "Display";
         answer1="1";
         answer2="2";
@@ -36,6 +37,7 @@ public class Display extends View {
     }
 
     public Position getPosition(float x, float y) {
+        //Setting up the position for the answer button
         if(Math.pow((x-getCenter().x),2)+Math.pow((y-getCenter().y),2)<10000){
             return Position.MIDDLE_BUTTON;
         } else if(Math.pow((x-getCenter().x),2)+Math.pow((y-getCenter().y-300),2)<10000){
@@ -50,7 +52,7 @@ public class Display extends View {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-
+        //To draw the blank canvas accordingly
         PointF center = getCenter();
         canvas.drawText(message,center.x,300,paint);
         if(selection == Position.NONE){
@@ -101,20 +103,24 @@ public class Display extends View {
     }
 
     public void setSelection(Position position){
+        //Set the selection for our answer
         selection = position;
     }
 
     public void setMessage(String message){
+        //Setting the question message
         this.message = message;
     }
 
     public void setAllAnswer(String answer1, String answer2, String answer3){
+        //Set all the answer to be displayed
         this.answer1 = answer1;
         this.answer2 = answer2;
         this.answer3 = answer3;
     }
 
     public String getChosenAnswer(){
+        //To return the result of chosen answer
         if(selection == Position.TOP_BUTTON){
             return answer1;
         } else if (selection == Position.MIDDLE_BUTTON){

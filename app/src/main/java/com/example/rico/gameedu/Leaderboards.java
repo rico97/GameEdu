@@ -18,15 +18,19 @@ public class Leaderboards extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_leaderboards);
 
+        //Opening the database
         SimpleDatabase db;
         db = new SimpleDatabase(this);
 
+        //Setting up the array for the leaderboards
         ArrayList<Integer> myArray;
         ArrayList<String> ranking = new ArrayList<>();
         myArray = db.getAllScores();
 
+        //Sorting it
         Collections.sort(myArray, Collections.reverseOrder());
 
+        //Putting up the score into the leaderboards with the maximum of 10 score
         int enumerator = 1;
         if(myArray.size()<10) {
             for (int points : myArray) {

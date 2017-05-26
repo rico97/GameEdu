@@ -16,6 +16,7 @@ public class ResultDisplay extends View {
     private String finalScore;
     public ResultDisplay(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        //Setting up the initial display
         finalScore = "0";
         paint = new Paint();
         paint.setTextAlign(Paint.Align.CENTER);
@@ -27,6 +28,7 @@ public class ResultDisplay extends View {
     }
 
     public Position getPosition(float x, float y) {
+        //To set up the position for the share and exit button
         if (Math.pow((x - getCenter().x), 2) + Math.pow((y - getCenter().y-100)*4, 2) < 160000) {
             return Position.SHARE_BUTTON;
         } else if (Math.pow((x - getCenter().x), 2) + Math.pow((y - getCenter().y - 400)*4, 2) < 160000) {
@@ -39,7 +41,7 @@ public class ResultDisplay extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        //To draw the canvas accordingly
         PointF center = getCenter();
         paint.setColor(Color.CYAN);
         canvas.drawOval(center.x-400,center.y,center.x+400,center.y+200,paint);
@@ -56,6 +58,7 @@ public class ResultDisplay extends View {
     }
 
     public void setFinalScore(int finalScore){
+        //Method used to set the final score to be displayed
         this.finalScore = Integer.toString(finalScore);
     }
 

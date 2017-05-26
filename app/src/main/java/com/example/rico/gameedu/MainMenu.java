@@ -37,7 +37,7 @@ public class MainMenu extends AppCompatActivity {
     }
 
     public void showActionBar() {
-
+        //Method used to create the custom action bar for leaderboards and setting
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayShowHomeEnabled(false);

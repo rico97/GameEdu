@@ -17,7 +17,7 @@ import java.util.Locale;
 import java.util.Random;
 
 public class GamePlay extends Activity{
-    // The following are used for the shake detection
+    // The following are the global variable
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private ShakeDetector mShakeDetector;
@@ -40,26 +40,30 @@ public class GamePlay extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //To remove the status bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_game_play);
-
+        //Setting up the local variable to avoid warnings
         SharedPreferences settings;
         String difficultyLevel;
         String musicStatus;
-
+        //Preparing the settings for the game
         settings = getSharedPreferences("Settings",MODE_PRIVATE);
         soundManager = new SoundManager(this);
         choose = soundManager.addSound(R.raw.choose_sound);
         move = soundManager.addSound(R.raw.move_sound);
-
+        //Preparing the database
         db = new SimpleDatabase(this);
 
+        //Set the music to loop
         mp = MediaPlayer.create(getApplicationContext(), R.raw.game_music);
         mp.setLooping(true);
 
         difficultyLevel = settings.getString("Difficulty","Easy");
         musicStatus = settings.getString("Music","On");
+
+        //To set the difficulty level
         switch (difficultyLevel){
             case "Easy":
                 numberLevel = 10;
@@ -75,6 +79,7 @@ public class GamePlay extends Activity{
                 break;
         }
 
+        //To play the music or not
         switch (musicStatus){
             case "On":
                 mp.start();
@@ -83,13 +88,15 @@ public class GamePlay extends Activity{
                 break;
         }
 
+        //Setting up the initial value and display
         gamescreen = (Display) findViewById(R.id.gameScreen);
         questionNo = 1;
         scores = 0;
         random = new Random();
-
+        //Creating the first question
         createQuestion();
 
+        //For the shake sensor
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager
                 .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -103,12 +110,14 @@ public class GamePlay extends Activity{
 				 * method you would use to setup whatever you want done once the
 				 * device has been shook.
 				 */
-
+                //To check the answer whether it is answered or not
                 String answer = gamescreen.getChosenAnswer();
                 if(answer.equals("NO ANSWER")){
+                    //If no selection is made
                     Toast.makeText(GamePlay.this, "Please select an answer",Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    //If selection is made, move to the next question
                     soundManager.play(move);
                     checkAnswer();
                     if(questionNo<10){
@@ -120,11 +129,12 @@ public class GamePlay extends Activity{
                 }
             }
         });
+        //To start the counter
         tStart = System.currentTimeMillis();
     }
 
     public boolean onTouchEvent(MotionEvent event) {
-
+        //To refresh the display everytime the screen is touched
         if (event.getAction() != MotionEvent.ACTION_UP) {
             return super.onTouchEvent(event);
         }
@@ -140,13 +150,13 @@ public class GamePlay extends Activity{
     @Override
     public void onResume() {
         super.onResume();
-        // Add the following line to register the Session Manager Listener onResume
+        // To re-register the shake listener
         mSensorManager.registerListener(mShakeDetector, mAccelerometer,	SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
     public void onPause() {
-        // Add the following line to unregister the Sensor Manager onPause
+        // To unregister the shake listener and stop the song
         mSensorManager.unregisterListener(mShakeDetector);
         mp.stop();
         super.onPause();
@@ -155,6 +165,8 @@ public class GamePlay extends Activity{
 
 
     public void showResultScreen(){
+        //To stop the timer and go to the result screen
+        //This also add the score into the database and close the databse
         long tEnd;
         tEnd = System.currentTimeMillis();
         long tDelta = tEnd - tStart;
@@ -168,6 +180,7 @@ public class GamePlay extends Activity{
     }
 
     public void checkAnswer(){
+        //To verify the answer whther it is right or wrong
         String answer = gamescreen.getChosenAnswer();
         int answerToCheck = Integer.parseInt(answer);
         if(frontNumber+backNumber == answerToCheck){
@@ -176,6 +189,7 @@ public class GamePlay extends Activity{
     }
 
     public void createQuestion(){
+        //Method used to create the question
         gamescreen.setSelection(Position.NONE);
         frontNumber = random.nextInt(numberLevel/2)+1;
         backNumber = random.nextInt(numberLevel/2)+1;
@@ -202,6 +216,7 @@ public class GamePlay extends Activity{
     }
 
     public void scoreTimeMultiplierCount(){
+        //Method used to count the score based on the time
         if(elapsedSeconds>=19){
             elapsedSeconds=19;
         } else if(elapsedSeconds<=10){

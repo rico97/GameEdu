@@ -19,21 +19,25 @@ public class Setting extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_setting);
 
+        //Setting up the radio group
         difficultyLevel = (RadioGroup) findViewById(R.id.difficultyLevel);
         musicActivated = (RadioGroup) findViewById(R.id.musicButton);
 
+        //Preparing the local variable
         RadioButton easyButton;
         RadioButton normalButton;
         RadioButton hardButton;
         RadioButton musicOnButton;
         RadioButton musicOffButton;
 
+        //Referencing the local variable
         easyButton = (RadioButton) findViewById(R.id.easyButton);
         normalButton = (RadioButton) findViewById(R.id.normalButton);
         hardButton = (RadioButton) findViewById(R.id.hardButton);
         musicOnButton = (RadioButton) findViewById(R.id.musicOn);
         musicOffButton = (RadioButton) findViewById(R.id.musicOff);
 
+        //Setting up the first selection of our setting
         settings = getSharedPreferences("Settings", MODE_PRIVATE);
 
         String currentDifficulty = settings.getString("Difficulty","Easy");
@@ -59,25 +63,12 @@ public class Setting extends Activity {
         }
 
 
-        /*if(currentDifficulty.equals("Easy")){
-            difficultyLevel.check(easyButton.getId());
-        } else if(currentDifficulty.equals("Normal")){
-            difficultyLevel.check(normalButton.getId());
-        } else if(currentDifficulty.equals("Hard")){
-            difficultyLevel.check(hardButton.getId());
-        }
-
-        if(currentMusic.equals("On")){
-            difficultyLevel.check(musicOnButton.getId());
-        } else if(currentMusic.equals("Off")){
-            difficultyLevel.check(musicOffButton.getId());
-        }*/
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        //Applying all the setting
         int difficultyID = difficultyLevel.getCheckedRadioButtonId();
         RadioButton difficultySelected = (RadioButton) findViewById(difficultyID);
         String selectedDifficulty = (String) difficultySelected.getText();

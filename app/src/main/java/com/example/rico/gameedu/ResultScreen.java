@@ -32,14 +32,15 @@ public class ResultScreen extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_result_screen);
 
+        //Setting up the display
         resultDisplay = (ResultDisplay) findViewById(R.id.resultScreen);
-
+        //Setting up the sound
         soundManager = new SoundManager(this);
         screenshot = soundManager.addSound(R.raw.screenshot_sound);
         choose = soundManager.addSound(R.raw.choose_sound);
-
+        //Setting up the database
         db = new SimpleDatabase(this);
-
+        //Getting the current score from the database
         int currentScoreId = db.getScoreCount();
 
         Cursor c = db.getPerson(currentScoreId);
@@ -47,13 +48,14 @@ public class ResultScreen extends Activity {
             c.moveToFirst();
             finalScore = c.getInt(c.getColumnIndex("score"));
         }
+        //Set the final score on the screen
         resultDisplay.setFinalScore(finalScore);
 
 
     }
 
     public boolean onTouchEvent(MotionEvent event) {
-
+        //To set up the action when a the share button or exit button is selected
         if (event.getAction() != MotionEvent.ACTION_UP) {
             return super.onTouchEvent(event);
         }
@@ -72,6 +74,7 @@ public class ResultScreen extends Activity {
     }
 
     public void shareTwitter(){
+        //Method to share on twitter
         View screenshot = getWindow().getDecorView().getRootView();
         screenshot.setDrawingCacheEnabled(true);
         Bitmap screenBitmap = screenshot.getDrawingCache();
