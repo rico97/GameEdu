@@ -1,4 +1,4 @@
-package com.example.rico.gameedu;
+package com.myfirstgame.rico.gameedu;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;

@@ -1,4 +1,4 @@
-package com.example.rico.gameedu;
+package com.myfirstgame.rico.gameedu;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -90,12 +90,12 @@ public class ResultScreen extends Activity {
 
         File newCache = new File(this.getCacheDir(),"Screenshot");
         File image = new File(newCache,"Screenshot.png");
-        Uri uri = FileProvider.getUriForFile(this,"com.example.rico.gameedu.fileprovider", image);
+        Uri uri = FileProvider.getUriForFile(this,"com.myfirstgame.rico.gameedu.fileprovider", image);
 
         Intent tweet = new Intent(Intent.ACTION_SEND);
         tweet.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         tweet.setDataAndType(uri, this.getContentResolver().getType(uri));
-        String twitterPost = ("I just got a score of "+finalScore+" in What's the number");
+        String twitterPost = ("I just got a score of "+finalScore+" in What's the number. Download at https://play.google.com/store/apps/details?id=com.myfirstgame.rico.gameedu");
         tweet.putExtra(Intent.EXTRA_TEXT,twitterPost);
         tweet.putExtra(Intent.EXTRA_STREAM,uri);
         tweet.setType("image/*");

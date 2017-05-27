@@ -1,4 +1,4 @@
-package com.example.rico.gameedu;
+package com.myfirstgame.rico.gameedu;
 
 
 enum Position {

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.rico.gameedu.Instruction"
+    tools:context="com.myfirstgame.rico.gameedu.Instruction"
     android:background="@drawable/bg_side"
     android:orientation="vertical">
 

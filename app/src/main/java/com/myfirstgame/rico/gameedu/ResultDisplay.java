@@ -1,4 +1,4 @@
-package com.example.rico.gameedu;
+package com.myfirstgame.rico.gameedu;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_side"
-    tools:context="com.example.rico.gameedu.Leaderboards">
+    tools:context="com.myfirstgame.rico.gameedu.Leaderboards">
 
     <TextView
         android:id="@+id/leaderBoardTitle"

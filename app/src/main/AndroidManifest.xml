@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rico.gameedu">
+    package="com.myfirstgame.rico.gameedu">
 
     <uses-feature
         android:name="android.hardware.sensor.accelerometer"
@@ -13,21 +13,21 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainMenu">
+        <activity android:name="com.myfirstgame.rico.gameedu.MainMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Setting" />
-        <activity android:name=".Leaderboards" />
-        <activity android:name=".GamePlay" />
-        <activity android:name=".ResultScreen" />
-        <activity android:name=".Instruction">
+        <activity android:name="com.myfirstgame.rico.gameedu.Setting" />
+        <activity android:name="com.myfirstgame.rico.gameedu.Leaderboards" />
+        <activity android:name="com.myfirstgame.rico.gameedu.GamePlay" />
+        <activity android:name="com.myfirstgame.rico.gameedu.ResultScreen" />
+        <activity android:name="com.myfirstgame.rico.gameedu.Instruction">
         </activity>
         <provider
-            android:authorities="com.example.rico.gameedu.fileprovider"
+            android:authorities="com.myfirstgame.rico.gameedu.fileprovider"
             android:name="android.support.v4.content.FileProvider"
             android:grantUriPermissions="true"
             android:exported="false">
